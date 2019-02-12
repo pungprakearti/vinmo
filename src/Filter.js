@@ -23,6 +23,7 @@ export default class Filter extends Component {
 
     this.handleClickSection = this.handleClickSection.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   /** If filter section header is clicked, toggle display of section */
@@ -49,27 +50,54 @@ export default class Filter extends Component {
 
   /** toggle selection of filters */
   handleSelect(evt) {
-    console.log('getting here');
-    let className = evt.target.className.baseVal;
+    //
+    //get className based on font awesome icon. There is a bug where one icon
+    //is nested within a container, so you lose the className. Also, if you
+    //click on the div, but miss the icon, you still get a selection.
+    let className;
+    if (evt.target.parentElement.className.baseVal) {
+      className = evt.target.parentElement.className.baseVal;
+    } else {
+      if (evt.target.className.baseVal) {
+        className = evt.target.className.baseVal;
+      } else className = evt.target.className;
+    }
+
     let period = className.indexOf('.');
     let section = className.slice(className.lastIndexOf('-') + 1, period);
     let option = className.slice(period + 1);
 
-    // <---------- ERROR here
+    //this code prevents vintage options from not being selected by
+    //changing them into numbers like they are stored.
+    if (section === 'vintage') option = +option;
 
-    console.log(section, option);
-
+    //toggle selection
     if (this.state.selection[section].indexOf(option) === -1) {
-      this.setState({
-        selection: { ...this.state.selection, [section]: option }
-      });
+      this.setState(st => ({
+        selection: {
+          ...st.selection,
+          [section]: [...st.selection[section], option]
+        }
+      }));
     } else {
-      let tempState = this.state.selection[section];
-      console.log(tempState);
-      this.setState({
-        selection: { ...this.state.selection, [section]: option }
-      });
+      let tempState = [...this.state.selection[section]].filter(
+        i => i !== option
+      );
+      this.setState(st => ({
+        selection: { ...st.selection, [section]: tempState }
+      }));
     }
+  }
+
+  handleClear() {
+    this.setState({
+      selection: {
+        manufacturer: [],
+        appellation: [],
+        varietal: [],
+        vintage: []
+      }
+    });
   }
 
   render() {
@@ -96,17 +124,18 @@ export default class Filter extends Component {
                     return (
                       <div className="Filter-options">
                         <div className="Filter-options-text">{option}</div>
-                        <div>
+                        <div
+                          className={`Filter-options-icon-cont Filter-${header}.${option}`}
+                          onClick={this.handleSelect}
+                        >
                           {this.state.selection[header].indexOf(option) ===
                           -1 ? (
-                            <FaSquare
-                              className={`Filter-options-icon Filter-${header}.${option}`}
-                              onClick={this.handleSelect}
+                            <FaRegSquare
+                              className={`Filter-icon Filter-${header}.${option}`}
                             />
                           ) : (
-                            <FaRegSquare
-                              className={`Filter-options-icon Filter-${header}.${option}`}
-                              onClick={this.handleSelect}
+                            <FaSquare
+                              className={`Filter-icon Filter-${header}.${option}`}
                             />
                           )}
                         </div>
@@ -117,6 +146,9 @@ export default class Filter extends Component {
               </React.Fragment>
             );
           })}
+        </div>
+        <div className="Filter-clear" onClick={this.handleClear}>
+          Clear
         </div>
       </div>
     );
