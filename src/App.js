@@ -11,33 +11,65 @@ import axios from 'axios';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, product_listing: [] };
+    this.state = {
+      loading: true,
+      products: [],
+      filters: [],
+      filtered: [],
+      filterSelection: []
+    };
+
+    this.toggleFilters = this.toggleFilters.bind(this);
   }
 
   componentDidMount() {
-    console.log('mounted, fetching data');
+    //
+    //fetch data from API
     axios
       .get('http://vwewebtest.com/wines/array.php')
       .then(res => {
+        //
+        //all products
+        let products = res.data.product_listing;
+
+        //filters
+        let filters = findFilters(products);
+
+        //save to state
         this.setState({
-          product_listing: res.data.product_listing,
-          loading: false
+          loading: false,
+          products: products,
+          filters: filters,
+          filtered: products,
+          filterSelection: []
         });
+
+        console.log('mounted, fetching data');
       })
       .catch(err => {
         console.log('error:', err);
       });
   }
 
+  toggleFilters(filterSelection) {
+    //filter products here and then add to state
+    this.setState = { filterSelection: filterSelection };
+  }
+
   render() {
-    if (!this.state.loading) findFilters(this.state.product_listing);
+    if (!this.state.loading) console.log(this.state.filters);
     return (
       <div className="App">
-        {this.state.loading ? 'LOADING' : 'READY TO GO!'}
         <Header />
-        <Filter />
-        <Sort />
-        <Board />
+        {this.state.loading ? (
+          'LOADING'
+        ) : (
+          <React.Fragment>
+            <Filter filters={this.state.filters} toggle={this.toggleFilters} />
+            <Sort />
+            <Board />
+          </React.Fragment>
+        )}
         <Footer />
       </div>
     );

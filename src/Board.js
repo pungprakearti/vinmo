@@ -2,6 +2,6 @@ import React, { Component } from 'react';
 
 export default class Board extends Component {
   render() {
-    return 'Board';
+    return <div>Board</div>;
   }
 }

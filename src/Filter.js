@@ -20,6 +20,6 @@ export default class Filter extends Component {
   }
 
   render() {
-    return 'Filter';
+    return <div>Filter</div>;
   }
 }
