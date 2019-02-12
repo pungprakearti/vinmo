@@ -57,19 +57,22 @@ class App extends Component {
   }
 
   render() {
-    // if (!this.state.loading) console.log(this.state.filters);
     return (
       <div className="App">
         <Header />
-        {this.state.loading ? (
-          'LOADING'
-        ) : (
-          <React.Fragment>
-            <Filter filters={this.state.filters} toggle={this.toggleFilters} />
-            <Sort />
-            <Board />
-          </React.Fragment>
-        )}
+        <div className="Main-cont">
+          {this.state.loading ? (
+            'LOADING'
+          ) : (
+            <React.Fragment>
+              <Filter
+                filters={this.state.filters}
+                toggle={this.toggleFilters}
+              />
+              <Board />
+            </React.Fragment>
+          )}
+        </div>
         <Footer />
       </div>
     );
