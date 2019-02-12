@@ -21,10 +21,12 @@ export default class Filter extends Component {
       }
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickSection = this.handleClickSection.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
-  handleClick(evt) {
+  /** If filter section header is clicked, toggle display of section */
+  handleClickSection(evt) {
     //
     //get section name
     let section = evt.target.className.slice(
@@ -32,16 +34,45 @@ export default class Filter extends Component {
     );
 
     //toggle showing options
-    if (this.refs[section].className === 'Filter-options-cont hide') {
-      this.refs[section].setAttribute('class', 'Filter-options-cont');
-    } else {
+    if (this.state.showOptions[section]) {
+      this.setState({
+        showOptions: { ...this.state.showOptions, [section]: false }
+      });
       this.refs[section].setAttribute('class', 'Filter-options-cont hide');
+    } else {
+      this.setState({
+        showOptions: { ...this.state.showOptions, [section]: true }
+      });
+      this.refs[section].setAttribute('class', 'Filter-options-cont');
+    }
+  }
+
+  /** toggle selection of filters */
+  handleSelect(evt) {
+    console.log('getting here');
+    let className = evt.target.className.baseVal;
+    let period = className.indexOf('.');
+    let section = className.slice(className.lastIndexOf('-') + 1, period);
+    let option = className.slice(period + 1);
+
+    // <---------- ERROR here
+
+    console.log(section, option);
+
+    if (this.state.selection[section].indexOf(option) === -1) {
+      this.setState({
+        selection: { ...this.state.selection, [section]: option }
+      });
+    } else {
+      let tempState = this.state.selection[section];
+      console.log(tempState);
+      this.setState({
+        selection: { ...this.state.selection, [section]: option }
+      });
     }
   }
 
   render() {
-    console.log(this.props);
-
     return (
       <div className="Filter-cont">
         Filter Search
@@ -51,15 +82,12 @@ export default class Filter extends Component {
               <React.Fragment>
                 <div
                   className={`Filter-options-header Filter-header-${header}`}
-                  onClick={this.handleClick}
+                  onClick={this.handleClickSection}
                 >
                   <div className={`Filter-header-text Filter-header-${header}`}>
                     {header}
                   </div>
-                  <div
-                    className={`Filter-header-text Filter-header-${header}`}
-                    ref={`${header}-icon`}
-                  >
+                  <div className={`Filter-header-text Filter-header-${header}`}>
                     -
                   </div>
                 </div>
@@ -68,8 +96,19 @@ export default class Filter extends Component {
                     return (
                       <div className="Filter-options">
                         <div className="Filter-options-text">{option}</div>
-                        <div className="Filter-options-icon">
-                          <FaRegSquare />
+                        <div>
+                          {this.state.selection[header].indexOf(option) ===
+                          -1 ? (
+                            <FaSquare
+                              className={`Filter-options-icon Filter-${header}.${option}`}
+                              onClick={this.handleSelect}
+                            />
+                          ) : (
+                            <FaRegSquare
+                              className={`Filter-options-icon Filter-${header}.${option}`}
+                              onClick={this.handleSelect}
+                            />
+                          )}
                         </div>
                       </div>
                     );
