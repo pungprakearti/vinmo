@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.loading) console.log(this.state.filters);
+    // if (!this.state.loading) console.log(this.state.filters);
     return (
       <div className="App">
         <Header />

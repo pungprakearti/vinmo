@@ -3,9 +3,9 @@
 export default function findFilters(arr) {
   let options = {
     manufacturer: [],
+    vintage: [],
     appellation: [],
-    varietal: [],
-    vintage: []
+    varietal: []
   };
 
   //iterate through array
