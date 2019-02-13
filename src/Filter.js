@@ -97,6 +97,7 @@ export default class Filter extends Component {
     }
   }
 
+  /** clear the filters */
   handleClear() {
     this.setState({
       selection: {
@@ -111,6 +112,7 @@ export default class Filter extends Component {
   /** When the state is changed, I check for a difference in the selection
       If there is a difference, I call the prop that calls filterProducts */
   componentDidUpdate(prevProps, prevState) {
+    //
     //selection changed, filter products!
     if (
       JSON.stringify(prevState.selection) !==

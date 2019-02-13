@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import findFilters from './utility/findFilters.js';
 import Header from './Header';
 import Filter from './Filter';
-import Sort from './Sort';
 import Board from './Board';
 import Footer from './Footer';
 import axios from 'axios';
@@ -50,10 +49,17 @@ class App extends Component {
       });
   }
 
+  /** filter products */
   handleFilters(filterSelection) {
-    //
-    //filter products here and then add to state
-    filterProducts(filterSelection, this.state.products);
+    let filtered = filterProducts(filterSelection, this.state.products);
+
+    //if the filtered list is empty, fill it with all the products
+    if (filtered.length < 1) filtered = this.state.products;
+    else {
+      this.setState({
+        filtered: filterProducts(filterSelection, this.state.products)
+      });
+    }
   }
 
   render() {
