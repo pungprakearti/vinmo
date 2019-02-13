@@ -5,8 +5,9 @@ import Filter from './Filter';
 import Sort from './Sort';
 import Board from './Board';
 import Footer from './Footer';
-import './App.css';
 import axios from 'axios';
+import filterProducts from './utility/filterProducts';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -15,11 +16,10 @@ class App extends Component {
       loading: true,
       products: [],
       filters: [],
-      filtered: [],
-      filterSelection: []
+      filtered: []
     };
 
-    this.toggleFilters = this.toggleFilters.bind(this);
+    this.handleFilters = this.handleFilters.bind(this);
   }
 
   componentDidMount() {
@@ -40,8 +40,7 @@ class App extends Component {
           loading: false,
           products: products,
           filters: filters,
-          filtered: products,
-          filterSelection: []
+          filtered: products
         });
 
         console.log('mounted, fetching data');
@@ -51,9 +50,10 @@ class App extends Component {
       });
   }
 
-  toggleFilters(filterSelection) {
+  handleFilters(filterSelection) {
+    //
     //filter products here and then add to state
-    this.setState = { filterSelection: filterSelection };
+    filterProducts(filterSelection, this.state.products);
   }
 
   render() {
@@ -67,7 +67,7 @@ class App extends Component {
             <React.Fragment>
               <Filter
                 filters={this.state.filters}
-                toggle={this.toggleFilters}
+                toggleFilters={this.handleFilters}
               />
               <Board />
             </React.Fragment>

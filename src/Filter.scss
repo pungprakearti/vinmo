@@ -38,10 +38,13 @@
   transition: all 0.25s ease;
 }
 
-.Filter-options-cont.hide {
+.Filter-options-cont.shrink {
   max-height: 0px;
   opacity: 0;
-  z-index: -500;
+}
+
+.Filter-options-cont.hide {
+  display: none;
 }
 
 .Filter-header-text {

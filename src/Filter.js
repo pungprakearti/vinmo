@@ -21,13 +21,13 @@ export default class Filter extends Component {
       }
     };
 
-    this.handleClickSection = this.handleClickSection.bind(this);
+    this.handleToggleSection = this.handleToggleSection.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleClear = this.handleClear.bind(this);
   }
 
   /** If filter section header is clicked, toggle display of section */
-  handleClickSection(evt) {
+  handleToggleSection(evt) {
     //
     //get section name
     let section = evt.target.className.slice(
@@ -39,7 +39,15 @@ export default class Filter extends Component {
       this.setState({
         showOptions: { ...this.state.showOptions, [section]: false }
       });
-      this.refs[section].setAttribute('class', 'Filter-options-cont hide');
+      this.refs[section].setAttribute('class', 'Filter-options-cont shrink');
+
+      //this timeout sets the class to "hide" which sets the style to "display: none"
+      //without this, it still works, but selecting items below the collapsed section
+      //often doesn't work because the section is still taking up space in the DOM
+      setTimeout(() => {
+        this.refs[section].setAttribute('class', 'Filter-options-cont hide');
+      }, 250);
+      //
     } else {
       this.setState({
         showOptions: { ...this.state.showOptions, [section]: true }
@@ -100,6 +108,18 @@ export default class Filter extends Component {
     });
   }
 
+  /** When the state is changed, I check for a difference in the selection
+      If there is a difference, I call the prop that calls filterProducts */
+  componentDidUpdate(prevProps, prevState) {
+    //selection changed, filter products!
+    if (
+      JSON.stringify(prevState.selection) !==
+      JSON.stringify(this.state.selection)
+    ) {
+      this.props.toggleFilters(this.state.selection);
+    }
+  }
+
   render() {
     return (
       <div className="Filter-cont">
@@ -110,7 +130,7 @@ export default class Filter extends Component {
               <React.Fragment>
                 <div
                   className={`Filter-options-header Filter-header-${header}`}
-                  onClick={this.handleClickSection}
+                  onClick={this.handleToggleSection}
                 >
                   <div className={`Filter-header-text Filter-header-${header}`}>
                     {header}
