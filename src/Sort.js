@@ -23,37 +23,29 @@ export default class Sort extends Component {
     //
     //check for change in state and sort products
     if (this.state.sort !== prevState.sort) {
+      //
       //sort products
       switch (this.state.sort) {
         case '$-$$$':
-          this.setState({
-            sorted: sortArrBy(this.props.filtered, 'base_price')
-          });
+          this.props.setSorted(sortArrBy(this.props.filtered, 'base_price'));
           break;
+
         case '$$$-$':
-          this.setState({
-            sorted: sortArrBy(this.props.filtered, 'base_price', false)
-          });
+          this.props.setSorted(
+            sortArrBy(this.props.filtered, 'base_price', false)
+          );
           break;
+
         case 'z-a':
-          this.setState({
-            sorted: sortArrBy(
-              this.props.filtered,
-              'manufacturer',
-              false,
-              'varietal'
-            )
-          });
+          this.props.setSorted(
+            sortArrBy(this.props.filtered, 'manufacturer', false, 'varietal')
+          );
           break;
+
         default:
-          this.setState({
-            sorted: sortArrBy(
-              this.props.filtered,
-              'manufacturer',
-              true,
-              'varietal'
-            )
-          });
+          this.props.setSorted(
+            sortArrBy(this.props.filtered, 'manufacturer', true, 'varietal')
+          );
       }
     }
 
@@ -63,17 +55,20 @@ export default class Sort extends Component {
         'class',
         'Sort-dropdown-cont show'
       );
+
       setTimeout(() => {
         this.refs['Sort-dropdown-cont'].setAttribute(
           'class',
           'Sort-dropdown-cont grow'
         );
       }, 0);
+      //
     } else {
       this.refs['Sort-dropdown-cont'].setAttribute(
         'class',
         'Sort-dropdown-cont shrink'
       );
+
       setTimeout(() => {
         this.refs['Sort-dropdown-cont'].setAttribute(
           'class',

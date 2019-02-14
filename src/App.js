@@ -8,6 +8,11 @@ import axios from 'axios';
 import filterProducts from './utility/filterProducts';
 import './App.css';
 
+/*
+FOR TOMORROW: 
+If filter is changed, need to redo sort and reflect the change
+ */
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +24,7 @@ class App extends Component {
     };
 
     this.handleFilters = this.handleFilters.bind(this);
+    this.setSorted = this.setSorted.bind(this);
   }
 
   componentDidMount() {
@@ -54,12 +60,19 @@ class App extends Component {
     let filtered = filterProducts(filterSelection, this.state.products);
 
     //if the filtered list is empty, fill it with all the products
-    if (filtered.length < 1) filtered = this.state.products;
+    if (filtered.length < 1) this.setState({ filtered: this.state.products });
     else {
       this.setState({
         filtered: filterProducts(filterSelection, this.state.products)
       });
     }
+  }
+
+  /** method is sent down to Sort component and returns with
+      the sorted products and refreshes the props to the board
+      with it */
+  setSorted(sorted) {
+    this.setState({ filtered: sorted });
   }
 
   render() {
@@ -75,7 +88,10 @@ class App extends Component {
                 filters={this.state.filters}
                 toggleFilters={this.handleFilters}
               />
-              <Board filtered={this.state.filtered} />
+              <Board
+                filtered={this.state.filtered}
+                setSorted={this.setSorted}
+              />
             </React.Fragment>
           )}
         </div>
