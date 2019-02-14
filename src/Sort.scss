@@ -1,37 +1,47 @@
+@import './_config.scss';
+
 .Sort-cont {
   height: 30px;
-  width: 80px;
-  border: 1px solid green;
+  width: 95%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
   position: relative;
-  margin-left: 50px;
+  margin-right: 50px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   user-select: none;
 }
 
 .Sort-button {
-  border: 1px solid gray;
+  border: 1px solid $pLineC;
+  background-color: $pBGC;
   height: 100%;
-  width: 100%;
+  width: 100px;
   box-sizing: border-box;
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px $shad;
+  font-weight: bold;
 }
 
 .Sort-dropdown-cont {
   box-sizing: border-box;
   position: absolute;
   top: 30px;
-  left: 0;
+  right: 0;
   display: none;
-  border: 1px solid red;
-  width: 80px;
+  border: 1px solid $pLineC;
+  background-color: $pBGC;
+  width: 100px;
   opacity: 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   transition: all 0.25s ease;
 }
 
@@ -51,6 +61,9 @@
 
 .Sort-option {
   padding: 5px;
-  border: 1px solid yellow;
   z-index: 5;
+}
+
+.Sort-option:hover {
+  font-weight: bold;
 }

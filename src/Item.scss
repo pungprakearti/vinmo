@@ -1,9 +1,23 @@
+@import './_config.scss';
+
 .Item-cont {
   width: 150px;
-  border: 1px solid gray;
+  border: 1px solid $pLineC;
   margin: 5px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px $shad;
 }
 
 .Item-cont > img {
   height: 125px;
+}
+
+.Item-name {
+  font-weight: bold;
+}
+
+.Item-price {
+  color: $iC;
 }

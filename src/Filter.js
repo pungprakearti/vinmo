@@ -125,7 +125,8 @@ export default class Filter extends Component {
   render() {
     return (
       <div className="Filter-cont">
-        Filter Search
+        <div className="Filter-header">Filter Search</div>
+
         <div>
           {Object.keys(this.props.filters).map(header => {
             return (

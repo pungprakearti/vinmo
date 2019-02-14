@@ -1,10 +1,15 @@
+@import './_config.scss';
+
 .Board-cont {
-  border: 1px solid black;
+  border-right: 1px solid $pLineC;
   width: calc(100% - 200px);
+  background-color: $sBGC;
+  padding-bottom: 20px;
+  // min-height: 550px;
+  min-height: calc(100vh - 270px);
 }
 
 .Board-items-cont {
-  padding-top: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

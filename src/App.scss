@@ -5,12 +5,20 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
+}
+
+html,
+body {
+  background-color: $dBGC;
 }
 
 .Main-cont {
-  /* border: 5px solid yellow; */
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
+  font-family: $ffMain;
+  font-size: 18px;
+  color: $pTextC;
 }

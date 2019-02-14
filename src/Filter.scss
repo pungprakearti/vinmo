@@ -1,9 +1,18 @@
+@import './_config.scss';
+
 .Filter-cont {
   width: 200px;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  border-left: 1px solid $pLineC;
+  border-right: 1px solid $pLineC;
+  box-sizing: border-box;
+  background-color: $tBGC;
+}
+
+.Filter-header {
+  padding: 5px;
+  font-weight: bold;
 }
 
 .Filter-options {
@@ -24,9 +33,10 @@
 
 .Filter-options-header {
   text-transform: uppercase;
-  background-color: black;
+  background-color: $iC;
   color: white;
-  border-top: 2px solid rgba(255, 255, 255, 0);
+  border-top: 2px solid $tBGC;
+  border-bottom: 2px solid $tBGC;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -53,4 +63,21 @@
   margin-right: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.Filter-clear {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid $pLineC;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100px;
+  background-color: $pBGC;
+  font-weight: bold;
+  color: $pTextC;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px $shad;
+  margin-bottom: 10px;
 }
