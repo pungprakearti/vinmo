@@ -75,7 +75,7 @@ class App extends Component {
                 filters={this.state.filters}
                 toggleFilters={this.handleFilters}
               />
-              <Board />
+              <Board filtered={this.state.filtered} />
             </React.Fragment>
           )}
         </div>

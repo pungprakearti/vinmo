@@ -6,8 +6,7 @@ export default class Board extends Component {
   render() {
     return (
       <div className="Board-cont">
-        <Sort />
-        Board
+        <Sort filtered={this.props.filtered} />
       </div>
     );
   }
