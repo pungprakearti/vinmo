@@ -39,20 +39,10 @@ export default class Filter extends Component {
       this.setState({
         showOptions: { ...this.state.showOptions, [section]: false }
       });
-      this.refs[section].setAttribute('class', 'Filter-options-cont shrink');
-
-      //this timeout sets the class to "hide" which sets the style to "display: none"
-      //without this, it still works, but selecting items below the collapsed section
-      //often doesn't work because the section is still taking up space in the DOM
-      setTimeout(() => {
-        this.refs[section].setAttribute('class', 'Filter-options-cont hide');
-      }, 250);
-      //
     } else {
       this.setState({
         showOptions: { ...this.state.showOptions, [section]: true }
       });
-      this.refs[section].setAttribute('class', 'Filter-options-cont');
     }
   }
 
@@ -119,6 +109,44 @@ export default class Filter extends Component {
       JSON.stringify(this.state.selection)
     ) {
       this.props.toggleFilters(this.state.selection);
+    }
+
+    //toggle section header
+    if (
+      JSON.stringify(prevState.showOptions) !==
+      JSON.stringify(this.state.showOptions)
+    ) {
+      for (let section in this.state.showOptions) {
+        //
+        //show section
+        if (
+          this.state.showOptions[section] !== prevState.showOptions[section]
+        ) {
+          if (this.state.showOptions[section]) {
+            this.refs[section].setAttribute(
+              'class',
+              'Filter-options-cont shrink'
+            );
+            setTimeout(() => {
+              this.refs[section].setAttribute(
+                'class',
+                'Filter-options-cont grow'
+              );
+            }, 0);
+          } else {
+            this.refs[section].setAttribute(
+              'class',
+              'Filter-options-cont shrink'
+            );
+            setTimeout(() => {
+              this.refs[section].setAttribute(
+                'class',
+                'Filter-options-cont hide'
+              );
+            }, 250);
+          }
+        }
+      }
     }
   }
 
