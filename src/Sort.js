@@ -5,7 +5,7 @@ import './Sort.scss';
 export default class Sort extends Component {
   constructor(props) {
     super(props);
-    this.state = { sort: 'a-z', sorted: [], show: false };
+    this.state = { sort: 'a-z', show: false };
 
     this.handleClick = this.handleClick.bind(this);
     this.toggleDropDown = this.toggleDropDown.bind(this);
@@ -21,8 +21,11 @@ export default class Sort extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     //
-    //check for change in state and sort products
-    if (this.state.sort !== prevState.sort) {
+    //check for change in state or props and sort products
+    if (
+      this.state.sort !== prevState.sort ||
+      JSON.stringify(this.props.filtered) !== JSON.stringify(prevProps.filtered)
+    ) {
       //
       //sort products
       switch (this.state.sort) {

@@ -6,12 +6,7 @@ import Board from './Board';
 import Footer from './Footer';
 import axios from 'axios';
 import filterProducts from './utility/filterProducts';
-import './App.css';
-
-/*
-FOR TOMORROW: 
-If filter is changed, need to redo sort and reflect the change
- */
+import './App.scss';
 
 class App extends Component {
   constructor(props) {

@@ -15,7 +15,7 @@ export default class Item extends Component {
           <br />
           {item.varietal}
         </div>
-        <div className="Item-price">{item.base_price - 0.01}</div>
+        <div className="Item-price">${item.base_price - 0.01}</div>
       </div>
     );
   }
