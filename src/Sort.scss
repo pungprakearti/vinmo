@@ -1,8 +1,55 @@
 .Sort-cont {
-  // position: absolute;
-  // top: 0;
-  left: 200px;
-  // width: calc(100% - 200px);
-  height: 50px;
+  height: 30px;
+  width: 80px;
   border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-left: 50px;
+  margin-top: 10px;
+  user-select: none;
+}
+
+.Sort-button {
+  border: 1px solid gray;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.Sort-dropdown-cont {
+  box-sizing: border-box;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  display: none;
+  border: 1px solid red;
+  width: 80px;
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.Sort-dropdown-cont.show,
+.Sort-dropdown-cont.grow,
+.Sort-dropdown-cont.shrink {
+  display: inline;
+}
+
+.Sort-dropdown-cont.grow {
+  opacity: 1;
+}
+
+.Sort-dropdown-cont.shrink {
+  opacity: 0;
+}
+
+.Sort-option {
+  padding: 5px;
+  border: 1px solid yellow;
+  z-index: 5;
 }

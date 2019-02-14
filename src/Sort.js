@@ -5,14 +5,17 @@ import './Sort.scss';
 export default class Sort extends Component {
   constructor(props) {
     super(props);
-    this.state = { sort: 'a-z', sorted: [] };
+    this.state = { sort: 'a-z', sorted: [], show: false };
 
     this.handleClick = this.handleClick.bind(this);
+    this.toggleDropDown = this.toggleDropDown.bind(this);
   }
 
+  /** this select's the sort type and hides the dropdown menu */
   handleClick(evt) {
     this.setState({
-      sort: evt.target.className.slice(evt.target.className.indexOf(' ') + 1)
+      sort: evt.target.className.slice(evt.target.className.indexOf(' ') + 1),
+      show: false
     });
   }
 
@@ -36,9 +39,9 @@ export default class Sort extends Component {
           this.setState({
             sorted: sortArrBy(
               this.props.filtered,
-              'varietal',
-              false
-              // 'varietal'
+              'manufacturer',
+              false,
+              'varietal'
             )
           });
           break;
@@ -53,13 +56,48 @@ export default class Sort extends Component {
           });
       }
     }
+
+    //check for change in show
+    if (this.state.show) {
+      this.refs['Sort-dropdown-cont'].setAttribute(
+        'class',
+        'Sort-dropdown-cont show'
+      );
+      setTimeout(() => {
+        this.refs['Sort-dropdown-cont'].setAttribute(
+          'class',
+          'Sort-dropdown-cont grow'
+        );
+      }, 0);
+    } else {
+      this.refs['Sort-dropdown-cont'].setAttribute(
+        'class',
+        'Sort-dropdown-cont shrink'
+      );
+      setTimeout(() => {
+        this.refs['Sort-dropdown-cont'].setAttribute(
+          'class',
+          'Sort-dropdown-cont'
+        );
+      }, 250);
+    }
+  }
+
+  toggleDropDown() {
+    if (this.state.show) {
+      this.setState({ show: false });
+    } else {
+      this.setState({ show: true });
+    }
   }
 
   render() {
     return (
       <div className="Sort-cont">
-        <div className="Sort-button">Sort</div>
-        <div className="Sort-dropdown-cont">
+        <div className="Sort-button" onClick={this.toggleDropDown}>
+          Sort
+        </div>
+        <div className="Sort-dropdown-cont" ref="Sort-dropdown-cont">
           <div className="Sort-option $-$$$" onClick={this.handleClick}>
             $ -> $$$
           </div>
