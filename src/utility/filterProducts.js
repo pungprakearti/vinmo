@@ -2,23 +2,30 @@
     finds all of the matches and returns a single array of products */
 export default function filterProducts(filterSelection, products) {
   let resultArr = [];
+  let tempProducts = [...products];
+  let index = 0;
 
-  //if filterSelection section has an item, search all products for it
   for (let section in filterSelection) {
+    //
+    //check if filter section has any selected options
     if (filterSelection[section].length > 0) {
-      let marker = 0;
-
-      //loop through all of the products
-      while (marker < products.length) {
+      while (tempProducts.length > 0 && index < tempProducts.length) {
+        //
+        //check if selection is in product
         if (
-          filterSelection[section].indexOf(products[marker][section]) !== -1
+          filterSelection[section].indexOf(tempProducts[index][section]) !== -1
         ) {
-          //if the product matches the filter, add it to the resultArr
-          resultArr.push(products[marker]);
+          //add to result and remore entry from tempProducts
+          resultArr.push(tempProducts[index]);
+          tempProducts.splice(index, 1);
+          //
+          //no matches, move index
+        } else {
+          index++;
         }
-        marker++;
       }
     }
+    index = 0;
   }
 
   return resultArr;
