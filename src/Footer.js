@@ -10,9 +10,7 @@ export default class Footer extends Component {
           <a href="https://www.biscuitsinthebasket.com">
             www.biscuitsinthebasket.com
           </a>
-          <a href="https://github.com/pungprakearti/vinmo">
-            https://github.com/pungprakearti/vinmo
-          </a>
+          <a href="https://github.com/pungprakearti/vinmo">VinMo! Github</a>
         </div>
       </div>
     );

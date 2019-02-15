@@ -29,6 +29,7 @@
 
 .Filter-options-text {
   text-align: left;
+  user-select: none;
 }
 
 .Filter-options-header {
@@ -86,4 +87,15 @@
   border-radius: 3px;
   box-shadow: 0 2px 5px $shad;
   margin-bottom: 10px;
+  user-select: none;
+}
+
+@media only screen and (max-width: 575px) {
+  .Filter-cont {
+    width: 100%;
+  }
+
+  .Filter-header-text {
+    margin-left: 20%;
+  }
 }

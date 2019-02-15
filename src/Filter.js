@@ -26,6 +26,19 @@ export default class Filter extends Component {
     this.handleClear = this.handleClear.bind(this);
   }
 
+  componentDidMount() {
+    if (window.screen.width <= 575) {
+      this.setState({
+        showOptions: {
+          manufacturer: false,
+          appellation: false,
+          varietal: false,
+          vintage: false
+        }
+      });
+    }
+  }
+
   /** If filter section header is clicked, toggle display of section */
   handleToggleSection(evt) {
     //

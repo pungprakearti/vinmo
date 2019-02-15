@@ -42,8 +42,6 @@ class App extends Component {
           filters: filters,
           filtered: products
         });
-
-        console.log('mounted, fetching data');
       })
       .catch(err => {
         console.log('error:', err);
