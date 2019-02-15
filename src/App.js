@@ -9,6 +9,7 @@ import filterProducts from './utility/filterProducts';
 import data from './mobileData.json';
 
 import './App.scss';
+import Loading from './Loading.js';
 
 class App extends Component {
   constructor(props) {
@@ -89,7 +90,7 @@ class App extends Component {
         <Header />
         <div className="Main-cont">
           {this.state.loading ? (
-            'LOADING'
+            <Loading />
           ) : (
             <React.Fragment>
               <Filter

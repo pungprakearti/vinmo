@@ -1,0 +1,22 @@
+@import './_config.scss';
+
+.Loading-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 250px);
+  background-color: $sBGC;
+  font-size: 24px;
+}
+
+.Loading-inner-cont {
+  width: 80%;
+}
+
+.Loading-inner-cont > img {
+  border: 1px solid $pLineC;
+  padding: 10px;
+  border-radius: 3px;
+}
