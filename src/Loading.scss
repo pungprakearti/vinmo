@@ -6,9 +6,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 250px);
   background-color: $sBGC;
   font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .Loading-inner-cont {
