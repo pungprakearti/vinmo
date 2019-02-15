@@ -6,7 +6,7 @@ import Board from './Board';
 import Footer from './Footer';
 import axios from 'axios';
 import filterProducts from './utility/filterProducts';
-import data from './data.json';
+
 import './App.scss';
 
 class App extends Component {
@@ -44,21 +44,8 @@ class App extends Component {
           filtered: products
         });
       })
-      //if the api errors out, use the local data just for testing.
       .catch(err => {
         console.log('error:', err);
-        let products = data.product_listing;
-
-        //filters
-        let filters = findFilters(products);
-
-        //save to state
-        this.setState({
-          loading: false,
-          products: products,
-          filters: filters,
-          filtered: products
-        });
       });
   }
 

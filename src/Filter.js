@@ -171,7 +171,7 @@ export default class Filter extends Component {
         <div>
           {Object.keys(this.props.filters).map(header => {
             return (
-              <React.Fragment>
+              <React.Fragment key={header}>
                 <div
                   className={`Filter-options-header Filter-header-${header}`}
                   onClick={this.handleToggleSection}
@@ -180,13 +180,13 @@ export default class Filter extends Component {
                     {header}
                   </div>
                   <div className={`Filter-header-text Filter-header-${header}`}>
-                    -
+                    {this.state.showOptions[header] ? '-' : '+'}
                   </div>
                 </div>
                 <div className="Filter-options-cont" ref={header}>
                   {this.props.filters[header].map(option => {
                     return (
-                      <div className="Filter-options">
+                      <div className="Filter-options" key={option}>
                         <div className="Filter-options-text">{option}</div>
                         <div
                           className={`Filter-options-icon-cont Filter-${header}.${option}`}
