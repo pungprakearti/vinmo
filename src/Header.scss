@@ -41,6 +41,7 @@
 
 .Header-vin,
 .Header-mo {
+  user-select: none;
   position: absolute;
   text-shadow: 0 5px 15px $shad;
 }
