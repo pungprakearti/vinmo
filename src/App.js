@@ -6,6 +6,7 @@ import Board from './Board';
 import Footer from './Footer';
 import axios from 'axios';
 import filterProducts from './utility/filterProducts';
+import data from './mobileData.json';
 
 import './App.scss';
 
@@ -33,20 +34,33 @@ class App extends Component {
         //all products
         let products = res.data.product_listing;
 
-        //filters
-        let filters = findFilters(products);
-
-        //save to state
-        this.setState({
-          loading: false,
-          products: products,
-          filters: filters,
-          filtered: products
-        });
+        this.filterAndSetState(products);
       })
       .catch(err => {
         console.log('error:', err);
+
+        //if mobile, use local data
+        if (window.screen.width < 575) {
+          let products = data.product_listing;
+
+          this.filterAndSetState(products);
+        }
       });
+  }
+
+  /** find filters and set state */
+  filterAndSetState(products) {
+    //
+    //filters
+    let filters = findFilters(products);
+
+    //save to state
+    this.setState({
+      loading: false,
+      products: products,
+      filters: filters,
+      filtered: products
+    });
   }
 
   /** filter products */
