@@ -17,6 +17,10 @@ The workaround for this is to click on the shield on the right of the toolbar an
 
 There is no workaround for this on mobile, so instead, I just locally saved the API response and have that load ONLY for mobile so that people can experience the site on mobile.
 
+<p align="center">
+<img src="vinmo_preview.png" alt="preview of vinmo site" width="500px"/>
+</p>
+
 ## Boiler Plate create-react-app stuff below
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
