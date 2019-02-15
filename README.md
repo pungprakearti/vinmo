@@ -1,3 +1,24 @@
+# VinMo!
+
+VinMo! is a test web application that I made. It sends a request to an API and uses that data to dynamically create filters and ecommerce items on a board. This was created in React and was deployed on Netlify.
+
+You can try the live demo here:
+<a href="https://affectionate-bose-d0e184.netlify.com/">https://affectionate-bose-d0e184.netlify.com/</a>
+
+## Issues
+
+In order to view the site, you have to allow unsafe scripts to load in Chrome. The reasoning behind this is because deploying on Netlify hosts the site on "https."
+
+The API is hosted on "http."
+
+When a request is made from "https" to "http" it is deemed unsafe because of "Mixed Content."
+
+The workaround for this is to click on the shield on the right of the toolbar and then to click on "Load Unsafe Scripts" in the dialog box that follows.
+
+There is no workaround for this on mobile, so instead, I just locally saved the API response and have that load ONLY for mobile so that people can experience the site on mobile.
+
+## Boiler Plate create-react-app stuff below
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
